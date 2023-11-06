@@ -2,10 +2,13 @@ class Solution:
     def numEnclaves(self, grid: List[List[int]]) -> int:
         def dfs(i, j):
             grid[i][j] = 0
-            print(i,j)
-            for x, y in (i - 1, j), (i + 1, j), (i, j - 1), (i, j + 1):
-                if 0 <= x < m and 0 <= y < n and grid[x][y]:
-                    dfs(x, y)
+            dx=[0,0,1,-1]
+            dy=[1,-1,0,0]
+            for idx in range(4):
+                nx=j+dx[idx]
+                ny=i+dy[idx]
+                if 0 <= ny < m and 0 <= nx < n and grid[ny][nx]:
+                    dfs(ny, nx)
         m, n = len(grid), len(grid[0])
         for i in range(m):
             for j in range(n):
